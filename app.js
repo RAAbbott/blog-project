@@ -4,10 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
-const store = require("store");
 
 const posts = [];
-store.set("posts", posts);
 
 const homeStartingContent = "Welcome to this Daily Journal/Blog app! Take some time to write down your thoughts about whatever is on your mind at the moment. Writing is a great way to relieve stress and provoke deep thought. If you are struggling with a question or are anxious about something, write it down, express how you feel and you'll feel better! Just click on the NEW ENTRY option at the top to get started. Anyways, thanks for stumbling on this page, and I hope you enjoy the app! (Notes are saved for as long as you are on the page, after you leave they disappear).";
 const aboutContent = "There isn't much to see here, this is mostly a filler page. If I were a blogger I'd have a ong story introducing myself, what I like to do and why I'm entering the blogging space. I'd probably have some professional pictures posted here as well.";
@@ -22,7 +20,7 @@ app.use(express.static("public"));
 
 
 app.get("/", function(req, res) {
-  res.render("home", {homeContent: homeStartingContent, posts: store.get("posts")});
+  res.render("home", {homeContent: homeStartingContent, posts: posts});
 });
 
 app.get("/about", function(req, res) {
@@ -48,7 +46,6 @@ app.post("/compose", function(req, res) {
     body: req.body.entryBody,
   };
   posts.push(post);
-  store.set("posts", posts);
 
   res.redirect("/");
 });
