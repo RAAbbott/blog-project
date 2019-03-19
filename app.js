@@ -4,12 +4,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
+const store = require("store");
 
 const posts = [];
+store.set("posts", posts);
 
-const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
-const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
-const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
+const homeStartingContent = "Welcome to this Daily Journal/Blog app! Take some time to write down your thoughts about whatever is on your mind at the moment. Writing is a great way to relieve stress and provoke deep thought. If you are struggling with a question or are anxious about something, write it down, express how you feel and you'll feel better! Just click on the NEW ENTRY option at the top to get started. Anyways, thanks for stumbling on this page, and I hope you enjoy the app! (Notes are saved for as long as you are on the page, after you leave they disappear)."
+const aboutContent = "There isn't much to see here, this is mostly a filler page. If I were a blogger I'd have a ong story introducing myself, what I like to do and why I'm entering the blogging space. I'd probably have some professional pictures posted here as well.";
+const contactContent = "If you want to get ahold of me you can check out my links at the bottom of the page! I have my email, github and linkedIn where you can reach me. I love meeting new people and talking about random things, so get in touch if you want to chat!";
 
 const app = express();
 
@@ -20,7 +22,7 @@ app.use(express.static("public"));
 
 
 app.get("/", function(req, res) {
-  res.render("home", {homeContent: homeStartingContent, posts: posts});
+  res.render("home", {homeContent: homeStartingContent, posts: store.get("posts")});
 });
 
 app.get("/about", function(req, res) {
@@ -36,7 +38,6 @@ app.get("/compose", function(req, res) {
 });
 
 app.get("/post/:postTitle", function(req, res){
-  console.log(posts);
   const singlePost = posts.filter(post => _.lowerCase(post.title) == _.lowerCase(req.params.postTitle));
   res.render("post", {title: singlePost[0].title, body: singlePost[0].body, postTitle: req.params.postTitle});
 });
@@ -47,8 +48,7 @@ app.post("/compose", function(req, res) {
     body: req.body.entryBody,
   };
   posts.push(post);
-
-  console.log(posts);
+  store.set("posts", posts);
 
   res.redirect("/");
 });

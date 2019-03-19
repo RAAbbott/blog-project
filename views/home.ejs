@@ -2,11 +2,15 @@
 
   <h1>Home</h1>
   <p> <%= homeContent %> </p>
+  <hr>
 
   <% posts.forEach(post => { %>
     <% console.log(post.title) %>
     <h1><%= post.title %></h1>
     <p> <%= post.body.split("").splice(0,100).join("") + "..." %> <a href="post/<%=post.title%>">Read More</a> </p>
+    <hr>
   <%}); %>
+
+
 
   <%- include partials/footer.ejs %>
