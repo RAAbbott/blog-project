@@ -13,6 +13,10 @@
     background-color: #2d3436;
 }
 
+.inline {
+  display: inline;
+}
+
 .white-text {
   color: white;
 }

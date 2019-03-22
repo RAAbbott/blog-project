@@ -1,13 +1,17 @@
   <%- include partials/header.ejs %>
 
   <h1>Home</h1>
+
   <p> <%= homeContent %> </p>
   <hr>
-
   <% posts.forEach(post => { %>
     <% console.log(post.title) %>
-    <h1><%= post.title %></h1>
-    <p> <%= post.body.split("").splice(0,100).join("") + "..." %> <a href="post/<%=post.title%>">Read More</a> </p>
+    <form action="/delete" method="post">
+      <h1><%= post.title %></h1>
+      <p> <%= post.body.split("").splice(0,100).join("") + "..." %> <a href="post/<%=post.title%>">Read More</a> </p>
+      <button type="submit" name="button" class="float-right btn btn-sm btn-danger">Delete Post</button>
+      <input type="hidden" name="hiddenInput" value="<%=post._id%>">
+    </form>
     <hr>
   <%}); %>
 
