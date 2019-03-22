@@ -68,6 +68,10 @@ app.get("/post/:postTitle", function(req, res){
   })
 });
 
+app.get("/register", function(req, res) {
+  res.render("register");
+});
+
 app.post("/compose", function(req, res) {
   const newPost = new Post({
     title: req.body.entryTitle,
