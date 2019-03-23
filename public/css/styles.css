@@ -53,11 +53,12 @@ a:hover {
 }
 
 .form {
-  margin-top: 30%;
+  margin-top: 10%;
   max-width: 50%;
 }
 
 .register {
   background-color: #2d3436;
   color: white;
+  margin-top: 30px;
 }
