@@ -23,7 +23,7 @@ const postSchema = new mongoose.Schema ({
 const Post = mongoose.model("Post", postSchema);
 
 
-const homeStartingContent = "Welcome to this Daily Journal/Blog app! Take some time to write down your thoughts about whatever is on your mind at the moment. Writing is a great way to relieve stress and provoke deep thought. If you are struggling with a question or are anxious about something, write it down, express how you feel and you'll feel better! Just click on the NEW ENTRY option at the top to get started. Anyways, thanks for stumbling on this page, and I hope you enjoy the app!";
+const homeStartingContent = "Welcome to this Personal Blogging app! Take some time to write down your thoughts about whatever is on your mind at the moment. Writing is a great way to relieve stress and provoke deep thought. If you are struggling with a question or are anxious about something, write it down, express how you feel and you'll feel better! Just click on the NEW ENTRY option at the top to get started. Anyways, thanks for stumbling on this page, and I hope you enjoy the app!";
 const aboutContent = "There isn't much to see here, this is mostly a filler page. If I were a blogger I'd have a ong story introducing myself, what I like to do and why I'm entering the blogging space. I'd probably have some professional pictures posted here as well.";
 const contactContent = "If you want to get ahold of me you can check out my links at the bottom of the page! I have my email, github and linkedIn where you can reach me. I love meeting new people and talking about random things, so get in touch if you want to chat!";
 
